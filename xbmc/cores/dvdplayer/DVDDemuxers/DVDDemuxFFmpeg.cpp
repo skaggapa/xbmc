@@ -384,7 +384,7 @@ bool CDVDDemuxFFmpeg::Open(CDVDInputStream* pInput)
       if(!iformat)
       {
         std::string content = m_pInput->GetContent();
-
+	CLog::Log(LOGDEBUG, "Contents:  %s", content.c_str());
         /* check if we can get a hint from content */
         if( content.compare("audio/aacp") == 0 )
           iformat = m_dllAvFormat.av_find_input_format("aac");
@@ -394,6 +394,18 @@ bool CDVDDemuxFFmpeg::Open(CDVDInputStream* pInput)
           iformat = m_dllAvFormat.av_find_input_format("flv");
         else if( content.compare("video/x-flv") == 0 )
           iformat = m_dllAvFormat.av_find_input_format("flv");
+	else if( content.compare("audio/l16") == 0){
+	  CLog::Log(LOGDEBUG, "first");
+	  iformat = m_dllAvFormat.av_find_input_format("s16le");
+	}
+	else if( content.compare("audio/L16") == 0){
+	  iformat = m_dllAvFormat.av_find_input_format("s16le");
+	  CLog::Log(LOGDEBUG, "second");
+	}
+	else if( content.compare("audio/L16;rate=44100;channels=2") == 0){
+	  CLog::Log(LOGERROR, "third");
+	  iformat = m_dllAvFormat.av_find_input_format("s16le");
+	}
       }
 
       if (!iformat)
