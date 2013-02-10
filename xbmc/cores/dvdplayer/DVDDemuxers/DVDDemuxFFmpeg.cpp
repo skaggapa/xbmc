@@ -398,12 +398,12 @@ bool CDVDDemuxFFmpeg::Open(CDVDInputStream* pInput)
 	  CLog::Log(LOGDEBUG, "first");
 	  iformat = m_dllAvFormat.av_find_input_format("s16le");
 	}
-	else if( contents.compare("audio/L16") == 0){
-	  iformat = m_dllAvFormat.av_find_input_form("s16le");
+	else if( content.compare("audio/L16") == 0){
+	  iformat = m_dllAvFormat.av_find_input_format("s16le");
 	  CLog::Log(LOGDEBUG, "second");
 	}
 	else if( content.compare("audio/L16;rate=44100;channels=2") == 0){
-	  CLog::Log(LOGERROR, "third")
+	  CLog::Log(LOGERROR, "third");
 	  iformat = m_dllAvFormat.av_find_input_format("s16le");
 	}
 
